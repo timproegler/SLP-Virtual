@@ -1,5 +1,25 @@
 ![BlackHole: Audio Loopback Driver](Images/blackhole-banner-830px.png)
 
+# SLP-Virtual: Audio Loopback Drivers
+
+![Platform: macOS](https://img.shields.io/badge/platform-macOS-lightgrey)
+[![Release](https://img.shields.io/github/v/release/ExistentialAudio/BlackHole)](https://github.com/ExistentialAudio/BlackHole/releases)
+[![License](https://img.shields.io/github/license/ExistentialAudio/BlackHole)](LICENSE)
+
+SLP-Virtual are 4 modern macOS virtual audio loopback drivers that allows applications to
+pass audio to other applications with zero additional latency. SLP-Virtual is based on
+BlackHole by Existential Audio (see below for the original info).
+
+CHANGES to the original BlackHole project: We changed the xcode project file and
+create_installer.sh to build drivers with a custom name and a custom icon. The driver code
+remains untouched from the original BlackHole project!
+
+## Donate
+If you find this software useful please [sponsor the original creator of this software Existential Audio on Github.](https://github.com/sponsors/ExistentialAudio)
+
+# 
+
+
 # BlackHole: Audio Loopback Driver
 
 ![Platform: macOS](https://img.shields.io/badge/platform-macOS-lightgrey)
@@ -9,6 +29,7 @@
 [![Facebook](https://img.shields.io/badge/Like%20on%20Facebook-4267B2)](https://www.facebook.com/Existential-Audio-103423234434751)
 
 BlackHole is a modern macOS virtual audio loopback driver that allows applications to pass audio to other applications with zero additional latency.
+
 
 ### [Download Installer](https://existential.audio/blackhole/?pk_campaign=github&pk_kwd=readme) 
 
