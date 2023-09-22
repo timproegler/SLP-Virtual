@@ -1,4 +1,32 @@
 #!/bin/bash
 
+file_A1="/Library/Audio/Plug-Ins/HAL/SLP-Virtual A1.driver"
+file_A2="/Library/Audio/Plug-Ins/HAL/SLP-Virtual A2.driver"
+file_B1="/Library/Audio/Plug-Ins/HAL/SLP-Virtual B1.driver"
+file_B2="/Library/Audio/Plug-Ins/HAL/SLP-Virtual B2.driver"
+
+if [ -d "$file_A1" ] || [ -d "$file_A2" ] || [ -d "$file_B1" ] || [ -d "$file_A1" ]
+        then
+                if [ -d "$file_A1" ] ; then
+                        sudo rm -R "$file_A1"
+                fi
+                if [ -d "$file_A2" ] ; then
+                        sudo rm -R "$file_A2"
+                fi
+                if [ -d "$file_B1" ] ; then
+                        sudo rm -R "$file_B1"
+                fi
+                if [ -d "$file_B2" ] ; then
+                        sudo rm -R "$file_B2"
+                fi
+                if [[ $(sw_vers -productVersion) == "10.9" ]]
+                        then
+                                sudo sudo killall coreaudiod
+                        else
+                                sudo launchctl kickstart -k system/com.apple.audio.coreaudiod
+                fi
+                exit -1
+fi
+
 sudo mkdir -p /Library/Audio/Plug-Ins/HAL
 sudo chown -R root:wheel /Library/Audio/Plug-Ins/HAL

@@ -6,9 +6,9 @@
 # it may need execute permissions first by running this command:
 #   chmod +x create_installer.sh
 
-devTeamID="Q5C99V536K" # ⚠️ Replace this with your own developer team ID
+devTeamID="YR8DY3NL4F" # ⚠️ Replace this with your own developer team ID
 notarize=true # To skip notarization, set this to false
-notarizeProfile="notarize" # ⚠️ Replace this with your own notarytool keychain profile name
+notarizeProfile="Developer ID Installer: TIM ALEXANDER PROEGLER (YR8DY3NL4F)" # ⚠️ Replace this with your own notarytool keychain profile name
 
 ############################################################################
 
@@ -21,13 +21,13 @@ if [ ! -d BlackHole.xcodeproj ]; then
     exit 1
 fi
 
-declare -a arr=(" A1" " A2" " A3" " A4")
+declare -a arr=("A1" "A2" "B1" "B2")
+version="0.5.0"
+driverName="SLP-Virtual"
+
 for ver in "${arr[@]}"; do
     # Env
-    driverName="SLP-Virtual"
-    version=`git describe --tags --abbrev=0`
-    driverVartiantName=$driverName.$ver
-    bundleID="audio.sessionlinkpro.$driverName"
+    bundleID="audio.sessionlinkpro.$driverName-$ver"
     
     # Build
     xcodebuild \
@@ -37,8 +37,10 @@ for ver in "${arr[@]}"; do
       PRODUCT_BUNDLE_IDENTIFIER=$bundleID \
       GCC_PREPROCESSOR_DEFINITIONS='$GCC_PREPROCESSOR_DEFINITIONS 
       kNumber_Of_Channels=2 
-      kPlugIn_BundleID=\"'$bundleID'\" 
-      kDriver_Name=\"'$driverVartiantName'\"'
+      kPlugIn_BundleID=\"'$bundleID'\"
+      kPlugIn_Icon=\"SLP-Virtual.icns\"
+      kDevice_Name=\"'$driverName'\ '$ver'\" 
+      kDriver_Name=\"'$driverName'\ '$ver'\"'
     
     # Generate a new UUID
     uuid=$(uuidgen)
@@ -46,7 +48,7 @@ for ver in "${arr[@]}"; do
     mv Temp.plist build/BlackHole.driver/Contents/Info.plist
     
     mkdir Installer/root
-    driverBundleName="$driverVartiantName.driver"
+    driverBundleName="$driverName $ver.driver"
     mv build/BlackHole.driver "Installer/root/$driverBundleName"
     rm -r build
     
@@ -59,7 +61,6 @@ for ver in "${arr[@]}"; do
       "Installer/root/$driverBundleName"
       
 done
-exit 0
 
 # Create package with pkgbuild
 chmod 755 Installer/Scripts/preinstall
@@ -67,10 +68,11 @@ chmod 755 Installer/Scripts/postinstall
 
 pkgbuild \
   --sign $devTeamID \
+  --identifier "audio.sessionlinkpro.SLP-Virtual" \
   --root Installer/root \
   --scripts Installer/Scripts \
   --install-location /Library/Audio/Plug-Ins/HAL \
-  Installer/BlackHole.pkg
+  Installer/SLP-Virtual.pkg
 rm -r Installer/root
 
 # Create installer with productbuild
@@ -78,12 +80,12 @@ cd Installer
 
 echo "<?xml version=\"1.0\" encoding='utf-8'?>
 <installer-gui-script minSpecVersion='2'>
-    <title>$driverName: Virtual Audio Driver $ch $version</title>
+    <title>SLP-Virtual: Virtual Audio Drivers $version</title>
     <welcome file='welcome.html'/>
     <license file='../LICENSE'/>
     <conclusion file='conclusion.html'/>
     <domains enable_anywhere='false' enable_currentUserHome='false' enable_localSystem='true'/>
-    <pkg-ref id=\"$bundleID\"/>
+    <pkg-ref id=\"audio.sessionlinkpro.SLP-Virtual\"/>
     <options customize='never' require-scripts='false' hostArchitectures='x86_64,arm64'/>
     <volume-check>
         <allowed-os-versions>
@@ -91,23 +93,23 @@ echo "<?xml version=\"1.0\" encoding='utf-8'?>
         </allowed-os-versions>
     </volume-check>
     <choices-outline>
-        <line choice=\"$bundleID\"/>
+        <line choice=\"audio.sessionlinkpro.SLP-Virtual\"/>
     </choices-outline>
-    <choice id=\"$bundleID\" visible='true' title=\"$driverName $ch\" start_selected='true'>
-        <pkg-ref id=\"$bundleID\"/>
+    <choice id=\"audio.sessionlinkpro.SLP-Virtual\" visible='true' title=\"SLP-Virtual\" start_selected='true'>
+        <pkg-ref id=\"audio.sessionlinkpro.SLP-Virtual\"/>
     </choice>
-    <pkg-ref id=\"$bundleID\" version=\"$version\" onConclusion='none'>BlackHole.pkg</pkg-ref>
+    <pkg-ref id=\"audio.sessionlinkpro.SLP-Virtual\" version=\"$version\" onConclusion='none'>SLP-Virtual.pkg</pkg-ref>
 </installer-gui-script>" >> distribution.xml
 
 # Build
-installerPkgName="$driverVartiantName.$version.pkg"
+installerPkgName="SLP-Virtual.$version.pkg"
 productbuild \
   --sign $devTeamID \
   --distribution distribution.xml \
   --resources . \
-  --package-path BlackHole.pkg $installerPkgName
+  --package-path SLP-Virtual.pkg $installerPkgName
 rm distribution.xml
-rm -f BlackHole.pkg
+rm -f SLP-Virtual.pkg
 
 # Notarize and Staple
 if [ "$notarize" = true ]; then
@@ -116,7 +118,7 @@ if [ "$notarize" = true ]; then
       --team-id $devTeamID \
       --progress \
       --wait \
-      --keychain-profile $notarizeProfile
+      --keychain-profile "$notarizeProfile"
     
     xcrun stapler staple $installerPkgName
 fi

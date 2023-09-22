@@ -17,6 +17,7 @@
 		3D8966462849C318002AB3F0 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 03FDCADB233FAE0500101681 /* LICENSE */; };
 		3D8966472849C318002AB3F0 /* BlackHole.icns in Resources */ = {isa = PBXBuildFile; fileRef = 03FDCAD9233F235500101681 /* BlackHole.icns */; };
 		3D8966482849C318002AB3F0 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 039FF2572341B6E800400D7A /* CHANGELOG.md */; };
+		56B094B52ABDD9E900955B09 /* SLP-Virtual.icns in Resources */ = {isa = PBXBuildFile; fileRef = 56B094B42ABDD9E900955B09 /* SLP-Virtual.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -53,6 +54,7 @@
 		3D89664D2849C318002AB3F0 /* BlackHole.driver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlackHole.driver; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D8966882849D45F002AB3F0 /* postinstall */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = postinstall; sourceTree = "<group>"; };
 		3D8966892849D45F002AB3F0 /* preinstall */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = preinstall; sourceTree = "<group>"; };
+		56B094B42ABDD9E900955B09 /* SLP-Virtual.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "SLP-Virtual.icns"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 		2D616EF015B8C82500D598BD /* BlackHole */ = {
 			isa = PBXGroup;
 			children = (
+				56B094B42ABDD9E900955B09 /* SLP-Virtual.icns */,
 				3D08380E284A7DE100C69403 /* BlackHole.plist */,
 				03FDCAD9233F235500101681 /* BlackHole.icns */,
 				2D616EF215B8C82500D598BD /* BlackHole.c */,
@@ -203,7 +206,7 @@
 						ProvisioningStyle = Automatic;
 					};
 					3D89663D2849C318002AB3F0 = {
-						DevelopmentTeam = Q5C99V536K;
+						DevelopmentTeam = YR8DY3NL4F;
 					};
 				};
 			};
@@ -233,6 +236,7 @@
 			files = (
 				3D8966462849C318002AB3F0 /* LICENSE in Resources */,
 				3D8966472849C318002AB3F0 /* BlackHole.icns in Resources */,
+				56B094B52ABDD9E900955B09 /* SLP-Virtual.icns in Resources */,
 				3D8966482849C318002AB3F0 /* CHANGELOG.md in Resources */,
 				3D083818284A7F1200C69403 /* VERSION in Resources */,
 				3D083819284A7F1500C69403 /* README.md in Resources */,
@@ -543,7 +547,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
-				DEVELOPMENT_TEAM = Q5C99V536K;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				DEVELOPMENT_TEAM = YR8DY3NL4F;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"DEBUG=0",
@@ -563,7 +568,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
-				DEVELOPMENT_TEAM = Q5C99V536K;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				DEVELOPMENT_TEAM = YR8DY3NL4F;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"DEBUG=1",
@@ -583,7 +589,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
-				DEVELOPMENT_TEAM = Q5C99V536K;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				DEVELOPMENT_TEAM = YR8DY3NL4F;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"DEBUG=1",
